@@ -11,10 +11,8 @@ const routes: Routes = [
     path: 'home',
     loadChildren: './home/home.module#HomePageModule'
   },
-  {
-    path: 'list',
-    loadChildren: './list/list.module#ListPageModule'
-  }
+  { path: 'add-view', loadChildren: './add-view/add-view.module#AddViewPageModule' },
+  { path: 'geoloc', loadChildren: './geoloc/geoloc.module#GeolocPageModule' }
 ];
 
 @NgModule({

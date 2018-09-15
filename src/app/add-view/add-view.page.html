@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ajouter une image</ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        [disabled]="viewFormGroup.invalid || !imgUrl"
+        (click)="onAddView()">Ajouter</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="snapshot" *ngIf="!imgUrl"></div>
+  <img [src]="imgUrl" *ngIf="imgUrl">
+  <p padding-bottom
+     no-margin
+     text-center
+     style="font-size: 12px"
+     *ngIf="lat && lng">Latitude: {{lat | number:'1.3-3' }} - Longitude: {{lng | number:'1.3-3' }}</p>
+  <p padding-bottom
+     no-margin
+     text-center
+     style="font-size: 12px"
+     *ngIf="!lat">Géolocalisation GPS/Wifi non disponible</p>
+  <ion-row justify-content-center style="padding-bottom: 10px">
+    <ion-fab-button (click)="takeShot()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button (click)="onGeoloc()" *ngIf="imgUrl" style="margin-left: 10px">
+      <ion-icon name="pin"></ion-icon>
+    </ion-fab-button>
+  </ion-row>
+
+  <form [formGroup]="viewFormGroup" *ngIf="imgUrl">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Titre</ion-label>
+        <ion-input type="text" formControlName="title"></ion-input>
+      </ion-item>
+      <p (click)="description=true" *ngIf="!description">
+        <ion-icon name="add"></ion-icon>
+        Ajouter une description
+      </p>
+      <ion-item *ngIf="description">
+        <ion-icon name="close" slot="end" (click)="description=false"></ion-icon>
+        <ion-label position="floating">Description</ion-label>
+        <ion-textarea formControlName="description"></ion-textarea>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>

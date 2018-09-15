@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onClose()">Fermer</ion-button>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>geoloc</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <h3>Cliquez un endroit de la carte pour positionner votre image</h3>
+  <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="onMoveMarker($event)">
+    <agm-marker
+      *ngIf="marker"
+      [(latitude)]="marker.lat"
+      [(longitude)]="marker.lng"
+      [markerDraggable]="true"
+      ></agm-marker>
+  </agm-map>
+</ion-content>
